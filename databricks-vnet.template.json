@@ -4,7 +4,7 @@
    "contentVersion": "1.0.0.0",
    "parameters": {
       "vnetName": {
-         "defaultValue": "DB-RDK-VNET1",
+         "defaultValue": "DB-VNET1",
 "type": "string"
    },
    "privateSubnetName": {
