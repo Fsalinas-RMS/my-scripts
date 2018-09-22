@@ -1,0 +1,66 @@
+{
+"$schema":
+"https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+   "contentVersion": "1.0.0.0",
+   "parameters": {
+      "vnetName": {
+         "defaultValue": "DB-RDK-VNET1",
+"type": "string"
+   },
+   "privateSubnetName": {
+      "defaultValue": "DB-Private1",
+      "type": "string"
+   },
+   "publicSubnetName": {
+      "defaultValue": "DB-Public1",
+      "type": "string"
+   },
+   "vnetCidr": {
+      "defaultValue": "10.92.32.0/20",
+      "type": "string"
+   },
+   "privateSubnetCidr": {
+      "defaultValue": "10.92.32.0/22",
+      "type": "string"
+   },
+   "publicSubnetCidr": {
+      "defaultValue": "10.92.36.0/22",
+      "type": "string"
+}, "nsgId": {
+     "defaultValue": "DB-RDK-NSG1",
+     "type": "string"
+   }
+},
+"resources": [
+   {
+      "apiVersion": "2018-02-01",
+      "location": "[resourceGroup().location]",
+      "name": "[parameters('vnetName')]",
+      "properties": {
+         "addressSpace": {
+            "addressPrefixes": [
+               "[parameters('vnetCidr')]"
+            ]
+         },
+         "subnets": [
+            {
+               "name": "[parameters('publicSubnetName')]",
+               "properties": {
+                  "addressPrefix": "[parameters('publicSubnetCidr')]",
+                  "networkSecurityGroup": {
+                        "id": "[parameters('nsgId')]"
+                  }
+} },
+            {
+               "name": "[parameters('privateSubnetName')]",
+               "properties": {
+                  "addressPrefix": "[parameters('privateSubnetCidr')]",
+                  "networkSecurityGroup": {
+                        "id": "[parameters('nsgId')]"
+                  }
+} }
+] },
+      "type": "Microsoft.Network/virtualNetworks"
+     } 
+   ]
+}
